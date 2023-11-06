@@ -1,5 +1,5 @@
 # Hackathon_KH
-PPT Being worked on right now.
+PPT on main page for steps explaining the code
 
 -Initial code for data preprocessing and model training is written in the 'main' folder, along with preprocessing functions and pipeline made into a module.
 
