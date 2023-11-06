@@ -14,7 +14,7 @@ from scipy.stats import mstats
 import numpy as np
 
 def handle_missing_values(df):
-    df.fillna(0, inplace=True)
+    df.fillna(df.median(), inplace=True)
     return df
 
 def convert_date_column(df):
@@ -70,16 +70,16 @@ from sklearn.preprocessing import FunctionTransformer
 
 # Define the preprocessing pipeline
 preprocessing_pipeline = Pipeline([
-    ('handle_missing_values', FunctionTransformer(handle_missing_values)),
     ('convert_date_column', FunctionTransformer(convert_date_column)),
     ('encode_categorical_feature', FunctionTransformer(encode_categorical_feature)),
     ('map_values', FunctionTransformer(map_values)),
     ('drop_null_rows', FunctionTransformer(drop_null_rows)),
     ('impute_missing_values', FunctionTransformer(impute_missing_values)),
-    ('winsorize_column', FunctionTransformer(winsorize_column))
+    ('winsorize_column', FunctionTransformer(winsorize_column)),
+    ('handle_missing_values', FunctionTransformer(handle_missing_values))
 ])
 
 # Save the preprocessing pipeline as a pickle file
 import joblib
-joblib.dump(preprocessing_pipeline, 'preprocessing_pipeline.pkl')
+joblib.dump(preprocessing_pipeline, 'preprocessing_pipeline_new.pkl')
 
