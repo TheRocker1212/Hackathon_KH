@@ -17,10 +17,6 @@ def handle_missing_values(df):
     df.fillna(df.median(), inplace=True)
     return df
 
-def convert_date_column(df):
-    df['earliest_cr_line'] = pd.to_datetime(df['earliest_cr_line'], format='%b-%y')
-    return df
-
 def encode_categorical_feature(df):
     encoder = OrdinalEncoder()
     df['grade'] = encoder.fit_transform(df[['grade']])
@@ -70,7 +66,6 @@ from sklearn.preprocessing import FunctionTransformer
 
 # Define the preprocessing pipeline
 preprocessing_pipeline = Pipeline([
-    ('convert_date_column', FunctionTransformer(convert_date_column)),
     ('encode_categorical_feature', FunctionTransformer(encode_categorical_feature)),
     ('map_values', FunctionTransformer(map_values)),
     ('drop_null_rows', FunctionTransformer(drop_null_rows)),
